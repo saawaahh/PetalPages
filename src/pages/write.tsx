@@ -12,6 +12,20 @@ const write = () => {
 
     const [journalEntry, setJournalEntry] = useState("");
 
+
+    const { mutate: createEntry} = api.journalling.createEntry.useMutation({
+
+      onSuccess(data){
+        replace('/entries/${data.id}');
+      }
+
+
+
+    });
+
+
+
+
     useEffect(() => {
         if (sessionStatus === "unauthenticated") {
           replace("/");
@@ -23,6 +37,11 @@ const write = () => {
       }
 
 
+      const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        createEntry({ content: journalEntry});
+      };
+
     return(
         <>
             <Head>
@@ -32,7 +51,10 @@ const write = () => {
             <h1 className="font-poppins text-center text-4xl font-bold text-neutral-50">
             Write
             </h1>
-            <form className="flex w-full flex-col justify-center gap-5">
+            <form 
+              className="flex w-full flex-col justify-center gap-5"
+              onSubmit={(e) => handleFormSubmit(e)}
+            >
                 <textarea
                      cols={30}
                      rows={10}
