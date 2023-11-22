@@ -17,7 +17,9 @@ const write = () => {
           replace("/");
         }
       }, [sessionStatus]);
-    
+
+
+    //my issue also may or may not be hereee
       if (sessionStatus === "loading") {
         return <Loading />;
       }
