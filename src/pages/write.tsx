@@ -12,35 +12,18 @@ const write = () => {
 
     const [journalEntry, setJournalEntry] = useState("");
 
-
-    const { mutate: createEntry} = api.journalling.createEntry.useMutation({
-
-      onSuccess(data){
-        replace('/entries/${data.id}');
-      }
-
-
-
-    });
-
-
-
-
     useEffect(() => {
         if (sessionStatus === "unauthenticated") {
           replace("/");
         }
       }, [sessionStatus]);
-    
+
+
+    //my issue also may or may not be hereee
       if (sessionStatus === "loading") {
         return <Loading />;
       }
 
-
-      const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        createEntry({ content: journalEntry});
-      };
 
     return(
         <>
@@ -51,10 +34,7 @@ const write = () => {
             <h1 className="font-poppins text-center text-4xl font-bold text-neutral-50">
             Write
             </h1>
-            <form 
-              className="flex w-full flex-col justify-center gap-5"
-              onSubmit={(e) => handleFormSubmit(e)}
-            >
+            <form className="flex w-full flex-col justify-center gap-5">
                 <textarea
                      cols={30}
                      rows={10}
