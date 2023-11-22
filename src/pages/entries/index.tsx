@@ -6,6 +6,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import Link from "next/link";
+import moment from "moment";
 
 const Entries = () => {
     const { status: sessionStatus } = useSession(); 
@@ -24,9 +25,10 @@ const Entries = () => {
         }
     }, [sessionStatus]);
 
-    if (sessionStatus === "loading") {
-        return <Loading />;
-      }
+    //idk if this is my issue or not
+    //if (sessionStatus === "loading") {
+        //return <Loading />;
+      //}
     
 
     return(
@@ -39,8 +41,26 @@ const Entries = () => {
             <h1 className="text-center font-poppins text-4xl font-bold text-neutral-50">
                 Entries
             </h1>
-            <NoEntries/>
-           
+            {entriesData?.length === 0 ? (
+                <NoEntries />
+            ) : (
+            entriesData?.map((entry) => (
+                <Link
+              href={`/entries/${entry.id}`}
+              key={entry.id}
+              className="mx-auto flex w-1/2 flex-row rounded-sm bg-slate-800 p-10"
+            >
+              <div className="truncate">
+                <p className="font-poppins text-lg text-gray-50">
+                  {entry.content}
+                </p>
+                <p className="font-montserrat text-gray-500">
+                  {moment(entry.dateCreated).format("MMM Do YYYY")}
+                </p>
+              </div>
+            </Link>
+            ))
+        )} 
         </section>
     </>
  
