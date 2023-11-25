@@ -1,4 +1,4 @@
-\import { exampleRouter } from "@/server/api/routers/example";
+import { exampleRouter } from "@/server/api/routers/example";
 import { createTRPCRouter } from "@/server/api/trpc";
 import { journallingRouter } from "@/server/api/routers/journalling";
 import { AIRouter } from "@/server/api/routers/ai"
