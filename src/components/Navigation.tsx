@@ -21,7 +21,7 @@ const Navigation = () => {
 
             </div>
         </div>
-        <ul className={'flex flex-col gap-8 md:flex-row text-neutral-100 md:items-center md:justify-end md:gap-20 ${!isOpen && "hidden md:flex"'}>
+        <ul className={'flex flex-col gap-8 md:flex-row text-neutral-100 md:items-center md:justify-end md:gap-20 md:pr-20 ${!isOpen && "hidden md:flex"'}>
             <Link href="/entries">Entries</Link>
             <Link href="/write">Write</Link>
             <button className="w-min" onClick ={() => void signOut()} >Logout</button>
