@@ -11,22 +11,23 @@ export default function Home() {
     <>
       <Head>
         <title>BrainSprout</title>
-        <meta name="description" content="An AI journalling app" />
+        <meta name="description" content="A journalling app to promote recovery" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div
-        className="flex h-screen items-center bg-lime-800"
+        className={`flex h-screen items-center bg-${sessionData ? 'bg-cyan-900' : 'cover bg-center'}`}
+        style={sessionData ? { backgroundColor: 'bg-cyan-900' } : { backgroundImage: `url(/landing.jpeg)` }}
       >
         <div className="m-auto mt-64 flex flex-col justify-center gap-5 text-center align-middle">
-          <h1 className="font-poppins bg-gradient-to-br from-white to-slate-100 box-decoration-slice bg-clip-text p-2 text-7xl font-extrabold text-transparent">
+          <h1 className="font-poppins bg-gradient-to-br from-gray-900 to-gray-900 box-decoration-slice bg-clip-text p-2 text-7xl font-extrabold text-transparent">
             BrainSprout
           </h1>
-          <h2 className="font-montserrat text-xl text-neutral-100">
+          <h2 className="font-montserrat text-xl text-bg-lime-900">
             sprout your recovery
           </h2>
           <button
             onClick={sessionData ? () => void signOut() : () => void signIn()}
-            className="font-poppins mx-auto rounded-sm bg-gradient-to-br from-green-900 to-green-950 px-20 py-2 text-2xl font-bold text-neutral-50 shadow-sm"
+            className="font-poppins mx-auto rounded-sm bg-gradient-to-br from-teal-800 to-teal-900 px-20 py-2 text-2xl font-bold text-neutral-50 shadow-sm"
           >
             {sessionData ? "Sign Out" : "Sign In"}
           </button>
