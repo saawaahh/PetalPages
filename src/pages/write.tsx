@@ -48,15 +48,15 @@ const Write = () => {
           <textarea
             cols={30}
             rows={10}
-            className="font-montserrat mx-auto rounded-sm border border-slate-800 bg-gray-100 p-5 tracking-wide md:w-1/2"
-            placeholder="Write down your thoughts"
+            className="font-montserrat mx-auto rounded-sm border border-slate-800 bg-lime-950 p-5 text-gray-50 tracking-wide md:w-1/2"
+            placeholder="What's on your mind?"
             value={journalEntry}
             onChange={(value) => setJournalEntry(value.target.value)}
             required
           ></textarea>
           <button
             type="submit"
-            className="font-poppins mx-auto w-2/3 whitespace-pre-line rounded-sm bg-gradient-to-br from-gray-700 to-gray-800 py-3 text-xl font-bold text-gray-50 md:w-1/2"
+            className="font-poppins mx-auto w-2/3 whitespace-pre-line rounded-sm bg-gradient-to-br from-emerald-900 to-emerald-950 py-3 text-xl font-bold text-gray-50 md:w-1/2"
           >
             Finish
           </button>
