@@ -1,69 +1,45 @@
-import Loading from "@/components/Loading";
-import { api } from "@/utils/api";
-import { useSession } from "next-auth/react";
-import Head from "next/head";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import { z } from "zod";
+import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
+import { env } from "@/env.mjs";
+import OpenAI from "openai";
 
-const Write = () => {
-  const { status: sessionStatus } = useSession();
-  const { replace } = useRouter();
+const openai = new OpenAI({
+  apiKey: env.OPENAI_KEY,
+});
 
-  const [journalEntry, setJournalEntry] = useState("");
+export const AIRouter = createTRPCRouter({
+  rateEntry: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const entry = await ctx.db.entry.findFirst({
+        where: {
+          id: input.id,
+        },
+        select: {
+          content: true,
+        },
+      });
 
-  const { mutate: createEntry } = api.journalling.createEntry.useMutation({
-    onSuccess(data) {
-      replace(`/entries/${data.id}`);
-    },
-  });
+      const prompt =
+        "Do sentiment analysis on the following statement between 1 and 10, 1 being negative and 10 being positive, return only the number so now extra text:";
 
-  useEffect(() => {
-    if (sessionStatus === "unauthenticated") {
-      replace("/");
-    }
-  }, [sessionStatus]);
+      const aiResponse = await openai.completions.create({
+        model: "gpt-3.5-turbo-instruct",
+        prompt: prompt + entry?.content,
+      });
 
-  if (sessionStatus === "loading") {
-    return <Loading />;
-  }
+      let rating = aiResponse.choices[0]?.text;
 
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    createEntry({ content: journalEntry });
-  };
+      console.log("this is the rating", rating);
+      rating = rating!.replace(/(\r\n|\n|\r)/gm, "");
 
-  return (
-    <>
-      <Head>
-        <title>Write</title>
-      </Head>
-      <section className="mt-32 flex flex-col justify-center gap-10">
-        <h1 className="font-poppins text-center text-4xl font-bold text-neutral-50">
-          Write
-        </h1>
-        <form
-          className="flex w-full flex-col justify-center gap-5"
-          onSubmit={(e) => handleFormSubmit(e)}
-        >
-          <textarea
-            cols={30}
-            rows={10}
-            className="font-montserrat mx-auto rounded-sm border border-slate-800 bg-lime-950 p-5 text-gray-50 tracking-wide md:w-1/2"
-            placeholder="What's on your mind?"
-            value={journalEntry}
-            onChange={(value) => setJournalEntry(value.target.value)}
-            required
-          ></textarea>
-          <button
-            type="submit"
-            className="font-poppins mx-auto w-2/3 whitespace-pre-line rounded-sm bg-gradient-to-br from-emerald-900 to-emerald-950 py-3 text-xl font-bold text-gray-50 md:w-1/2"
-          >
-            Finish
-          </button>
-        </form>
-      </section>
-    </>
-  );
-};
-
-export default Write;
+      await ctx.db.entry.update({
+        where: {
+          id: input.id,
+        },
+        data: {
+          moodRating: parseInt(rating),
+        },
+      });
+    }),
+});
