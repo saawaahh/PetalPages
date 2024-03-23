@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import moment from "moment";
 import { TrashIcon } from "@heroicons/react/24/solid";
 
-const Entry = () => {
+const Entry = (props) => {
   const { status: sessionStatus } = useSession();
   const { replace, query } = useRouter();
   const entryId = Array.isArray(query.pid) ? query.pid[0] : query.pid;
