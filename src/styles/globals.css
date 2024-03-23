@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply bg-pink-600
+}
+
+.container {
+    @apply mt-32 flex flex-col justify-center gap-10
+}
