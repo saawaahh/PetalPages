@@ -3,7 +3,7 @@
 
 ## 💕a cutie diary app for the girlies💕 
 
-This is a t3 stack authenticated journal app using TypeScript, Tailwind, Supabase, and SQLite
+This is a t3 stack authenticated journal app that uses AI to analyze and detect the mood of an entrie. Built using TypeScript, Tailwind, Supabase, and SQLite
 
 Built off my Human Factors semester project.
 
