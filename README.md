@@ -11,4 +11,4 @@ Landing picture was boughten from ModernMavenCo off of etsy
 
 
 🕷️🪲BUG ISSUES🐞🐛: 
-  - right now it is currenty experiencing a bug with its google auth. Hoping to fix soon as well as adding other ways a user can log in. 
+  - right now it is currenty experiencing a bug with its auth log-in. 
