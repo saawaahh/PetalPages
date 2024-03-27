@@ -14,7 +14,9 @@ Landing picture was boughten from ModernMavenCo off of etsy
   - right now it is currenty experiencing a bug with its auth log-in.
 
 
+# pics:
 
+<img width="1440" alt="Screenshot 2024-03-27 at 6 43 55 PM" src="https://github.com/saawaahh/PetalPages/assets/112594593/cf868ef7-8a52-46df-af3d-7b60f7ad220f">
 <img width="1440" alt="Screenshot 2024-03-27 at 6 35 46 PM" src="https://github.com/saawaahh/PetalPages/assets/112594593/056901cb-e786-4f10-bb2d-17eda9d94f2f">
 <img width="1440" alt="Screenshot 2024-03-27 at 6 35 53 PM" src="https://github.com/saawaahh/PetalPages/assets/112594593/fa8a8e95-573d-4e55-bb5b-ce0bcfb946b5">
 <img width="1440" alt="Screenshot 2024-03-27 at 6 36 46 PM" src="https://github.com/saawaahh/PetalPages/assets/112594593/efb48b44-8ff0-4364-8763-1310db8690f3">
