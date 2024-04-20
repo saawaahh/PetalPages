@@ -12,6 +12,7 @@ Landing picture was boughten from ModernMavenCo off of etsy
 
 🕷️🪲BUG ISSUES🐞🐛: 
   - right now it is currenty experiencing a bug with its auth log-in.
+  - once logged in and writting entiries I have noticed the fav icon displays Reacts default icon. I wonder if that has anything to do with my callback bug
 
 
 # pics:
